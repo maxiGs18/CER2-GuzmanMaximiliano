@@ -1,112 +1,63 @@
-# Refugio Huellitas (Certamen2)
+# Fundación Patrimonio Vivo
 
-Aplicación web hecha con Django para administrar un refugio de animales. Permite ver las mascotas en adopción, filtrarlas por especie y, con una cuenta, gestionar mascotas y especies según el grupo de permisos del usuario.
+**Asignatura:** Taller de Lenguajes de Programación (Certamen 2)
 
-## Requisitos
+**Estudiante:** Héctor Oxacopa
 
-- Python 3.10 o superior
-- pip
+## 📦 Instalación y Ejecución
 
-La base de datos es SQLite (viene incluida con Python), por lo que no hay que instalar nada más.
+Sigue estos pasos en la terminal para ejecutar la aplicación:
 
-## Instalación
+### 1. Instalación de dependencias
 
-### 1. Abrir una terminal en la carpeta del proyecto
+Instala los requerimientos necesarios leyendo el archivo `requirements.txt`:
 
-Debe ser la carpeta donde está el archivo `manage.py`.
-
-### 2. Crear y activar un entorno virtual (recomendado)
-
-Windows:
-
-```bash
-python -m venv venv
-venv\Scripts\activate
 ```
-
-Linux / macOS:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 3. Instalar las dependencias
-
-```bash
 pip install -r requirements.txt
 ```
 
-### 4. Aplicar las migraciones
+### 2. Aplicar migraciones
 
-```bash
-python manage.py makemigrations refugio
+Migra los cambios y modelos a la base de datos:
+
+```
+python manage.py makemigrations
 python manage.py migrate
 ```
 
-Esto crea las tablas en el archivo `db.sqlite3`.
+### 3. Levantar el servidor
 
-### 5. Crear los grupos de permisos
+Inicia el servidor de desarrollo local:
 
-```bash
-python manage.py crear_grupos
 ```
-
-Crea tres grupos:
-
-| Grupo | Permisos |
-|---|---|
-| Visitantes | Solo ver el panel de gestión |
-| Voluntarios | Ver, agregar y editar |
-| Administradores | Ver, agregar, editar y eliminar |
-
-### 6. Crear un superusuario
-
-```bash
-python manage.py createsuperuser
-```
-
-Sigue las instrucciones (nombre de usuario, correo y contraseña).
-
-### 7. Ejecutar el servidor
-
-```bash
 python manage.py runserver
 ```
 
-Abre el navegador en http://127.0.0.1:8000/
+Una vez ejecutado, abre tu navegador web e ingresa a la siguiente URL para ver la aplicación:
+👉 **`http://127.0.0.1:8000/`**
 
-## Uso
+## 🔐 Usuarios de Prueba para Evaluación (Roles y Permisos)
 
-1. Entra a http://127.0.0.1:8000/admin/ con el superusuario.
-2. En **Users**, crea los usuarios y asígnales un grupo (Visitantes, Voluntarios o Administradores).
-3. Inicia sesión en http://127.0.0.1:8000/inicioSesion/.
-4. Desde el **Panel de Gestión** se pueden agregar, editar y eliminar mascotas y especies, según los permisos del grupo.
+Para la demostración de la seguridad basada en roles (`@permission_required`), se han configurado los siguientes tres usuarios. **Nota:** Todos los usuarios comparten la misma contraseña.
 
-Primero se debe crear al menos una **especie** y después las mascotas, porque cada mascota pertenece a una especie.
+* **Contraseña general:** `CoquimboUnido`
 
-> La imagen de cada mascota se ingresa como **URL** y debe ser un enlace directo a la imagen (que termine en .jpg, .png, etc.).
+### Credenciales y Niveles de Acceso:
 
-## Rutas principales
+1. **`admin`**
+   * **Rol:** Superusuario (Administrador total).
+   * **Acceso:** Control y permisos absolutos en la plataforma y el panel de administración.
 
-| Ruta | Descripción |
-|---|---|
-| `/` | Página de inicio |
-| `/mascotas/` | Lista de mascotas y filtro por especie |
-| `/inicioSesion/` | Inicio de sesión |
-| `/logout/` | Cerrar sesión |
-| `/panelGestion/` | Panel de gestión (requiere permisos) |
-| `/admin/` | Administración de Django |
+2. **`test`**
+   * **Rol:** Gestor / Editor.
+   * **Acceso:** Posee permisos explícitos de lectura, adición y edición (`add` y `change`) para Lugares Patrimoniales y Categorías.
 
-## Estructura
+3. **`test2`**
+   * **Rol:** Usuario sin permisos.
+   * **Acceso:** No posee permisos especiales de gestión. Al intentar acceder a funciones de creación, edición o eliminación, el sistema denegará el acceso mostrando una respuesta `HTTP 403 Forbidden`.
 
-```
-Certamen2/          Configuración del proyecto (settings.py, urls.py)
-refugio/            Aplicación principal
-├── models.py       Modelos Mascota y Especie
-├── views.py        Vistas
-├── admin.py        Registro de modelos en el admin
-├── templates/      Archivos HTML
-├── static/css/     estilos.css
-└── management/commands/crear_grupos.py
-```
+---
+
+## 🔗 Repositorio del Proyecto
+
+- **GitHub:** https://github.com/DevManolito/CER2-OXACOPAHECTOR.git
