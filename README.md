@@ -85,4 +85,4 @@ for nombre, grupo in usuarios:
 
 ## 🔗 Repositorio del Proyecto
 
-- **GitHub:** [pega aquí el enlace de tu repositorio]
+- **GitHub:** https://github.com/maxiGs18/CER2-GuzmanMaximiliano
