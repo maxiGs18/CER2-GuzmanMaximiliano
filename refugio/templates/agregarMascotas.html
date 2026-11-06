@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Agregar Mascotas - Refugio Huellitas{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto;">
+    <h1>Agregar Mascotas</h1>
+
+    <form method="POST" action="{% url 'agregarMascotas' %}">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" required><br>
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" name="descripcion" required><br>
+
+        <label for="sexo">Sexo:</label>
+        <select name="sexo" required>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+        </select><br>
+
+        <label for="edad_aproximada">Edad Aproximada:</label>
+        <input type="number" name="edad_aproximada" required><br>
+
+        <label for="especie">Especie:</label>
+        <select name="especie" id="especie" required>
+            <option value="">Seleccionar Especie</option>
+            {% for especie in especies %}
+                <option value="{{ especie.codigo }}">{{ especie.nombre }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="imagen">URL de Imagen:</label>
+        <input type="url" name="imagen" required><br>
+
+        <button type="submit">Agregar Mascota</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Panel de Gestión - Refugio Huellitas{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Panel de Gestión</h1>
+
+        <div style="display: flex; gap: 10px;">
+            <a href="{% url 'agregarMascotas' %}" class="btn">Agregar Mascotas</a>
+            <a href="{% url 'agregarEspecie' %}" class="btn">Agregar Especie</a>
+        </div>
+        <div>
+            <h2>Mascotas Registradas</h2>
+            {% for mascota in mascotas %}
+                <h3>{{ mascota.nombre }}</h3>
+                <p>{{ mascota.descripcion }}</p>
+                <form action="{% url 'editarMascotas' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="codigo" value="{{ mascota.codigo }}">
+                    <button type="submit">Editar</button>
+                </form>
+
+                <form action="{% url 'eliminarMascotas' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="codigo" value="{{ mascota.codigo }}">
+                    <button type="submit">Eliminar</button>
+                </form>
+            {% empty %}
+            <p>No hay mascotas registradas.</p>
+            {% endfor %}
+        </div>
+
+
+
+        <div>
+            <h2>Especies Registradas</h2>
+            {% for especie in especies %}
+                <h3>{{ especie.nombre }}</h3>
+                <p>{{ especie.descripcion }}</p>
+                <form action="{% url 'editarEspecie' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="codigo" value="{{ especie.codigo }}">
+                    <button type="submit">Editar</button>
+                </form>
+
+                <form action="{% url 'eliminarEspecie' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="codigo" value="{{ especie.codigo }}">
+                    <button type="submit">Eliminar</button>
+                </form>
+            {% empty %}
+            <p>No hay especies registradas.</p>
+            {% endfor %}
+        </div>
+        
+    </div>
+{% endblock %}
+
+
+
+

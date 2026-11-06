@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Inicio - Refugio Huellitas{% endblock %}
+
+{% block content %}
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Bienvenido a Fundacion Huellas del Puerto</h1>
+                <p>Somos una fundacion sin fines de lucro de Valparaiso dedicada al rescate, 
+                a la rehabilitacion y adopcion de perros y gatos en situacion de calle y/o abandono que tenemos como 
+                mision el disminuir la tasa de animales en abandono o situacion de calle.</p>
+                <a href="{% url 'mascotas' %}" class="btn btn-primary btn-lg mt-3">Ver mascotas en adopcion</a>
+            </div>
+        </div>
+    </section>
+    <footer class="pie">
+        <div class="contenedor">Refugio Huellitas · Región de Valparaíso · Adopta, no compres 🐶🐱🐰</div>
+    </footer>
+{% endblock %}

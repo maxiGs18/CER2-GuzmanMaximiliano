@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Editar Mascota - Refugio Huellitas{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto;">
+    <a href="{% url 'panelGestion' %}">Volver a panel de Gestion</a>
+
+    <div style="max-width: 500px; margin: 0 auto;">
+        <h1>Editar Mascota</h1>
+        <p style="color: #444444; text-align: center;">Modifica los detalles de la mascota.</p>
+    </div>
+
+    <div class="form-container">
+        <form method="POST" action="{% url 'confirmarCambioMascota' %}">
+            {% csrf_token %}
+
+            <input type="hidden" name="codigo" value="{{ mascota.codigo }}">
+
+            <label for="nombre">Nombre de la Mascota:</label>
+            <input type="text" name="nombre" value="{{ mascota.nombre }}" required><br>
+
+            <label for="descripcion">Descripción:</label>
+            <input type="text" name="descripcion" value="{{ mascota.descripcion }}" required><br>
+
+            <label for="sexo">Sexo:</label>
+            <select name="sexo" required>
+                <option value="">Seleccionar Sexo</option>
+                <option value="Macho" {% if mascota.sexo == 'Macho' %}selected{% endif %}>Macho</option>
+                <option value="Hembra" {% if mascota.sexo == 'Hembra' %}selected{% endif %}>Hembra</option>
+            </select><br>
+
+            <label for="edad_aproximada">Edad Aproximada:</label>
+            <input type="number" name="edad_aproximada" value="{{ mascota.edad_aproximada }}" required><br>
+
+            <label for="especie">Especie:</label>
+            <select name="especie" id="especie" required>
+                {% for especie in especies %}
+                    <option value="{{ especie.codigo }}" {% if mascota.especie.codigo == especie.codigo %}selected{% endif %}>{{ especie.nombre }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="imagen">URL de Imagen:</label>
+            <input type="url" name="imagen" value="{{ mascota.imagen }}" required><br>
+
+            <button type="submit">Guardar Cambios</button>
+            <a href="{% url 'panelGestion' %}" class="cancelar-button">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

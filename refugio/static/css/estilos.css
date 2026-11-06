@@ -1,0 +1,4 @@
+.nav{background-color: #deecfa; padding: 10px; display: flex; justify-content: space-between; align-items: center;}
+.nav-interior {display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.6rem; }
+.logo{width: 100px; height: auto;}
+.menu{list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;}

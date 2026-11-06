@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Agregar Especie - Refugio Huellitas{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto;">
+    <a href="{% url 'panelGestion' %}">Volver a panel de Gestion</a>
+    
+    <div style="max-width: 500px; margin: 0 auto;">
+        <h1>Agregar Especie</h1>
+        <p style="color: #444444; text-align: center;">Ingresa los detalles de la nueva especie.</p>
+    </div>
+
+    <div class="form-container">
+        <form method="POST" action="{% url 'agregarEspecie' %}">
+            {% csrf_token %}
+
+            <label for="nombre">Nombre de la Especie:</label>
+            <input type="text" name="nombre" required placeholder="Ej: Perro, Gato, Conejo..."><br>
+
+            <label for="descripcion">Descripción:</label>
+            <input type="text" name="descripcion" required><br>
+
+            <button type="submit">Agregar Especie</button>
+            <a href="{% url 'panelGestion' %}" class="cancelar-button">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

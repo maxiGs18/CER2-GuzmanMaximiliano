@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Mascotas - Refugio Huellitas{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <h1>Lista de Mascotas</h1>
+</div>
+
+<div style="max-width: 800px; margin: 0 auto;">
+    <form method="POST" action="{% url 'mascotas' %}">
+        {% csrf_token %}
+        <label for="mascotas">Filtrar por Especie:</label>
+        <select name="codigo" id="codigo">  
+            {% for especie in listarEspecie %}
+                <option value="{{ especie.codigo }}">{{ especie.nombre }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+</div>
+
+<div style="max-width: 800px; margin: 0 auto;">
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Sexo</th>
+                <th>Edad Aproximada</th>
+                <th>Especie</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mascota in mascotas %}
+            <tr>
+                <td>{{ mascota.codigo }}</td>
+                <td>{{ mascota.nombre }}</td>
+                <td>{{ mascota.descripcion }}</td>
+                <td>{{ mascota.sexo }}</td>
+                <td>{{ mascota.edad_aproximada }}</td>
+                <td>{{ mascota.especie.nombre }}</td>
+                <td><img src="{{ mascota.imagen }}" alt="{{ mascota.nombre }}" width="100"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
